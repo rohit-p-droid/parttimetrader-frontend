@@ -1,103 +1,135 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import Link from "next/link";
+import Hero from "@/sections/hero";
+import Reviews from "../sections/reviews";
+import Pricing from "../sections/pricing";
+import { useAuth } from "@/lib/auth-context";
+import AnalyticsPreview from "../sections/analytics-preview";
+import LiveMarketPreview from "@/sections/live-market-preview";
+import { Shield, Zap, Users, ArrowRight, Eye, Brain, Filter, Bell } from "lucide-react";
+import StockSearch from "../sections/stock-search";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+
+export default function HomePage() {
+	const { isAuthenticated } = useAuth();
+
+	const features = [
+		{
+			icon: <Brain className="h-8 w-8" />,
+			title: "AI-Driven Insights",
+			description: "Machine learning algorithms analyze market patterns and generate actionable insights."
+		},
+		{
+			icon: <Zap className="h-8 w-8" />,
+			title: "Lightning Fast Backtesting",
+			description: "Test your strategies on years of historical data in seconds, not hours."
+		},
+		{
+			icon: <Filter className="h-8 w-8" />,
+			title: "Advanced Screeners",
+			description: "Custom filters to find stocks matching your exact criteria and trading style."
+		},
+		{
+			icon: <Bell className="h-8 w-8" />,
+			title: "Smart Alerts",
+			description: "Get notified instantly when your conditions are met or opportunities arise."
+		},
+		{
+			icon: <Shield className="h-8 w-8" />,
+			title: "Risk Analytics",
+			description: "Comprehensive portfolio risk assessment and position sizing recommendations."
+		},
+		{
+			icon: <Users className="h-8 w-8" />,
+			title: "Community Strategies",
+			description: "Share and discover winning strategies from our community of traders."
+		}
+	];
+
+
+
+
+
+	return (
+		<div className="min-h-screen page-bg">
+			{/* Hero Section */}
+			<Hero />
+
+			{/* Live Market Snapshot */}
+			<LiveMarketPreview />
+
+			{/* search stocks */}
+			<StockSearch/>
+
+			{/* Sample Analytics Preview */}
+			<AnalyticsPreview />
+
+			{/* Why Choose Us Features */}
+			<section className="py-20 section-bg">
+				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<div className="text-center mb-16">
+						<h2 className="text-3xl sm:text-4xl font-bold gradient-text mb-4">
+							Why Choose PartTimeTrader?
+						</h2>
+						<p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--muted-foreground)' }}>
+							Built by traders, for traders. Every feature designed to give you an edge.
+						</p>
+					</div>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{features.map((feature, index) => (
+							<div key={index} className="interactive-card text-center group">
+								<div className="text-primary-600 dark:text-primary-400 mb-4 pulse-glow group-hover:scale-110 transition-transform">
+									{feature.icon}
+								</div>
+								<h3 className="text-xl font-semibold mb-3" style={{ color: 'var(--card-foreground)' }}>
+									{feature.title}
+								</h3>
+								<p style={{ color: 'var(--muted-foreground)' }}>
+									{feature.description}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* Testimonials */}
+			<Reviews />
+
+			{/* Pricing Section */}
+			{!isAuthenticated && (
+				<Pricing />
+			)}
+
+			{/* CTA Section */}
+			{!isAuthenticated && (
+				<section className="py-20 bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 text-white">
+					<div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+						<h2 className="text-3xl sm:text-4xl font-bold mb-4">
+							Ready to Transform Your Trading?
+						</h2>
+						<p className="text-xl mb-8 text-blue-100">
+							Join 10,000+ traders who've upgraded their decision-making with our platform.
+						</p>
+						<div className="flex flex-col sm:flex-row gap-4 justify-center">
+							<Link href="/register" className="btn-primary bg-white text-primary-600 hover:bg-gray-100 text-lg px-8 py-4">
+								<span>Start Free Today</span>
+								<ArrowRight className="ml-2 h-5 w-5" />
+							</Link>
+							<Link href="/demo" className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-4 px-8 rounded-lg text-lg transition-all duration-200 flex items-center justify-center">
+								<Eye className="mr-2 h-5 w-5" />
+								See It In Action
+							</Link>
+						</div>
+						<p className="text-sm mt-6 text-blue-200">
+							No credit card required • Free forever plan available
+						</p>
+					</div>
+				</section>
+			)}
+		</div>
+	);
 }
